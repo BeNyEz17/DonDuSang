@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:DonDuSang.Model"
+             xmlns:vm="clr-namespace:DonDuSang.ViewModel"
+             x:DataType="vm:CentreDeDonDetailsViewModel"
+             x:Class="DonDuSang.DetailsPage"
+             Title="{Binding CentreDeDon.location_city}">
+
+    <Grid
+        RowDefinitions="220,Auto,Auto,*"
+        ColumnDefinitions="*"
+    >
+        <VerticalStackLayout Grid.Row="0" BackgroundColor="Orange">
+
+            <Border
+                Grid.ColumnSpan="3"
+                StrokeShape="RoundRectangle 80"
+                Stroke="white"
+                StrokeThickness="6"
+                HeightRequest="160"
+                WidthRequest="160"
+                Margin="0,8,0,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Image Aspect="AspectFill"
+                       HeightRequest="160"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Source="don_sang.jpg" 
+                       WidthRequest="160"/>
+            </Border>
+            
+            <Label Text="{Binding CentreDeDon.location_name}" HorizontalOptions="Center" FontSize="20" Margin="15"/>
+        </VerticalStackLayout>
+
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="1">
+
+            <HorizontalStackLayout HorizontalOptions="Center" >
+                <Label VerticalOptions="Center" Text="Sang" TextColor="Black"/>
+                <CheckBox Color="Orange" IsChecked="{Binding CentreDeDon.location_giveBlood}"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Grid.Column="1">
+                <Label VerticalOptions="Center" Text="Plasma" TextColor="Black"/>
+                <CheckBox Color="Orange" IsChecked="{Binding CentreDeDon.location_givePlasma}"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Grid.Column="2">
+                <Label VerticalOptions="Center" Text="Plaquette" TextColor="Black"/>
+                <CheckBox Color="Orange" IsChecked="{Binding CentreDeDon.location_givePlatelet}"/>
+            </HorizontalStackLayout>
+
+        </Grid>
+
+        <Grid RowDefinitions="auto" Grid.Row="2">
+            <Button Text="Localiser"
+                    BackgroundColor="White" 
+                    BorderColor="Orange"
+                    BorderWidth="2" 
+                    TextColor="Orange"
+                    FontSize="17"
+                    VerticalOptions="Center"
+                    WidthRequest="225" 
+                    HeightRequest="35" 
+                    CornerRadius="8"
+                    Command="{Binding OuvrirMapCommand}"/>
+        </Grid>
+        
+        <Grid RowDefinitions="*,*" Grid.Row="3">
+
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Date et heures de collection" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="{Binding CentreDeDon.collection_date}" FontSize="12" TextColor="Black" Padding="30,0,0,0"></Label>
+                <Label Text="Horraires matin :" TextColor="Black" FontSize="15" FontAttributes="Bold"/>
+                <Label Text="{Binding CentreDeDon.collection_morningStartTime}" FontSize="12" TextColor="Black" Padding="40,0,0,0"></Label>
+                <Label Text="{Binding CentreDeDon.collection_morningEndTime}" FontSize="12" TextColor="Black" Padding="40,0,0,0"></Label>
+                <Label Text="Horraires après-midi :" TextColor="Black" FontSize="15" FontAttributes="Bold"/>
+                <Label Text="{Binding CentreDeDon.collection_afternoonStartTime}" FontSize="12" TextColor="Black" Padding="40,0,0,0"></Label>
+                <Label Text="{Binding CentreDeDon.collection_afternoonEndTime}" FontSize="12" TextColor="Black" Padding="40,0,0,0" ></Label>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="1" Spacing="8">
+                <Label Text="Adresse" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="{Binding CentreDeDon.location_name}" FontSize="12" TextColor="Black" Padding="40,0,0,0"></Label>
+                <Label Text="{Binding CentreDeDon.location_address2}" FontSize="12" TextColor="Black" Padding="40,0,0,0" ></Label>
+                <Label Text="{Binding CentreDeDon.location_city}" FontSize="12" TextColor="Black" Padding="40,0,0,0"></Label>
+            </VerticalStackLayout>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>
+

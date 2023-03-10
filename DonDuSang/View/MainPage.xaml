@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:DonDuSang.Model"
+             xmlns:vm="clr-namespace:DonDuSang.ViewModel"
+             x:DataType="vm:CentresDeDonViewModel"
+             x:Class="DonDuSang.View.MainPage"
+             Title="{Binding Titre}">
+
+    <Grid
+        RowDefinitions="*,Auto"
+        ColumnDefinitions="*,*"
+    >
+        <CollectionView
+         ItemsSource= "{Binding Centres}"
+         Grid.ColumnSpan="2">
+
+            <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="model:CentreDeDon">
+                    <HorizontalStackLayout Padding="10" Spacing="15">
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource 
+                                AncestorType={x:Type vm:CentresDeDonViewModel}},
+                                Path=GoToDetailsCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                        <Image Source="don_sang.jpg" HeightRequest="100"> </Image>
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label Text="{Binding location_name}" FontSize="20" TextColor="Black"></Label>
+                        <Label Text="{Binding location_city}" FontSize="12" TextColor="Black" ></Label>
+                        <Label Text="{Binding collection_date}" FontSize="15" TextColor="Black"></Label>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+        <Button Text="Récuperer les centres"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="8"
+                HorizontalOptions="Center"
+                Style="{StaticResource ButtonOutline}"
+                Command="{Binding GetCentresDeDonCommand}"/>
+        <ActivityIndicator IsVisible="{Binding EstOccupé}"
+                           IsRunning="{Binding EstOccupé}"
+                           Grid.RowSpan="2"
+                           Grid.ColumnSpan="2"
+                           HeightRequest="80"
+                           WidthRequest="80"
+                           Color="{StaticResource Primary}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+    </Grid>
+</ContentPage>
